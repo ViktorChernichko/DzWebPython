@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Latest news</h1>
+{% for article in page_obj %}
+<article class="card">
+<h2><a href="{% url 'news:article_detail' article.pk %}">{{ article.title }}</a></h2>
+<p class="meta">{{ article.created_at|date:"Y-m-d H:i" }} &middot; {{ article.views }} views &middot; {{ article.comment_count }} comments</p>
+<p>{{ article.content|truncatewords:40 }}</p>
+</article>
+{% empty %}
+<p>No articles yet.</p>
+{% endfor %}
+{% include "_pagination.html" %}
+{% endblock %}

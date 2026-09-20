@@ -1,0 +1,10 @@
+{% extends "panel/base.html" %}
+{% block title %}Appearance{% endblock %}
+{% block panel_content %}
+<h2>Appearance</h2>
+<form method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">Save</button>
+</form>
+{% endblock %}

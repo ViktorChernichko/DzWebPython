@@ -1,0 +1,12 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+    <h1>Delete book "{{ book.title }}"?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" style="background-color: red; color: white;">Yes, delete</button>
+    </form>
+    <p><a href="{% url 'dz14:book_list' %}">No, go back</a></p>
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Administration</h1>
+<div class="subnav">
+<a href="{% url 'panel:dashboard' %}">Dashboard</a>
+<a href="{% url 'panel:article_list' %}">Articles</a>
+<a href="{% url 'panel:user_list' %}">Users</a>
+<a href="{% url 'panel:comment_list' %}">Comments</a>
+<a href="{% url 'panel:appearance' %}">Appearance</a>
+<a href="{% url 'panel:statistics' %}">Statistics</a>
+</div>
+{% block panel_content %}{% endblock %}
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends "panel/base.html" %}
+{% block title %}Admin dashboard{% endblock %}
+{% block panel_content %}
+<div class="stats">
+<div class="card"><div class="number">{{ article_total }}</div>Articles</div>
+<div class="card"><div class="number">{{ published_total }}</div>Published</div>
+<div class="card"><div class="number">{{ user_total }}</div>Users</div>
+<div class="card"><div class="number">{{ comment_total }}</div>Comments</div>
+<div class="card"><div class="number">{{ ban_total }}</div>Active bans</div>
+</div>
+<p><a class="button" href="{% url 'panel:article_create' %}">Publish new article</a></p>
+{% endblock %}

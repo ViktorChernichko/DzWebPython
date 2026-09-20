@@ -1,0 +1,41 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+    <h1>Books</h1>
+
+    {% if perms.dz14.add_book %}
+        <p><a href="{% url 'dz14:book_create' %}">+ Add book</a></p>
+    {% endif %}
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>ISBN</th>
+            <th>Year</th>
+            <th>Copies</th>
+            <th>Actions</th>
+        </tr>
+        {% for book in books %}
+        <tr>
+            <td>{{ book.title }}</td>
+            <td>{{ book.author }}</td>
+            <td>{{ book.isbn }}</td>
+            <td>{{ book.published_year }}</td>
+            <td>{{ book.copies_available }}</td>
+            <td>
+                {% if perms.dz14.change_book %}<a href="{% url 'dz14:book_update' book.id %}">Edit</a>{% endif %}
+                {% if perms.dz14.delete_book %} | <a href="{% url 'dz14:book_delete' book.id %}">Delete</a>{% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No books found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="{% url 'dz14:reader_list' %}">Go to readers</a></p>
+
+{% endblock %}

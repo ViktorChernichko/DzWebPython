@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}City News Portal{% endblock %}</title>
+<style>
+:root {
+  --bg: {{ site_settings.background_color }};
+  --fg: {{ site_settings.font_color }};
+  --fs: {{ site_settings.font_size }}px;
+  --line: rgba(127, 127, 127, 0.4);
+  --soft: rgba(127, 127, 127, 0.1);
+}
+* { box-sizing: border-box; }
+body { margin: 0; background: var(--bg); color: var(--fg); font-size: var(--fs); font-family: Georgia, "Times New Roman", serif; line-height: 1.55; }
+a { color: inherit; }
+header { border-bottom: 1px solid var(--line); background: var(--soft); }
+nav { max-width: 960px; margin: 0 auto; padding: 0.8em 1em; display: flex; flex-wrap: wrap; gap: 1em; align-items: center; }
+nav .brand { font-weight: bold; font-size: 1.2em; text-decoration: none; margin-right: auto; }
+nav form { display: inline; margin: 0; }
+main { max-width: 960px; margin: 0 auto; padding: 1em; }
+h1, h2, h3 { line-height: 1.25; }
+.card { border: 1px solid var(--line); background: var(--soft); border-radius: 6px; padding: 0.8em 1em; margin-bottom: 1em; }
+.card h2 { margin-top: 0; }
+.meta { opacity: 0.7; font-size: 0.85em; }
+.msg { padding: 0.6em 1em; border-radius: 6px; margin-bottom: 0.6em; border: 1px solid var(--line); }
+.msg.success { background: rgba(40, 160, 70, 0.2); }
+.msg.error { background: rgba(200, 50, 50, 0.2); }
+button, .button { display: inline-block; background: var(--fg); color: var(--bg); border: 0; border-radius: 4px; padding: 0.35em 0.9em; font: inherit; cursor: pointer; text-decoration: none; }
+button.danger { background: #b3261e; color: #fff; }
+button.link { background: none; color: inherit; padding: 0; text-decoration: underline; }
+form.inline { display: inline; }
+input[type=text], input[type=password], input[type=email], input[type=number], select, textarea { width: 100%; max-width: 560px; padding: 0.4em; font: inherit; border: 1px solid var(--line); border-radius: 4px; background: var(--bg); color: var(--fg); }
+input[type=color] { width: 70px; height: 40px; padding: 0; }
+form p { margin: 0.8em 0; }
+.errorlist { color: #b3261e; padding-left: 1.2em; margin: 0.2em 0; }
+.helptext { display: block; opacity: 0.7; font-size: 0.8em; }
+table { width: 100%; border-collapse: collapse; margin: 1em 0; }
+th, td { border-bottom: 1px solid var(--line); padding: 0.5em; text-align: left; vertical-align: top; }
+.subnav { display: flex; flex-wrap: wrap; gap: 0.6em; margin-bottom: 1em; }
+.subnav a { border: 1px solid var(--line); border-radius: 4px; padding: 0.25em 0.8em; text-decoration: none; background: var(--soft); }
+.stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1em; }
+.stats .card { text-align: center; }
+.stats .number { font-size: 2em; font-weight: bold; }
+.pagination { display: flex; gap: 1em; align-items: center; margin: 1em 0; }
+.badge { border: 1px solid var(--line); border-radius: 10px; padding: 0 0.6em; font-size: 0.8em; }
+</style>
+</head>
+<body>
+<header>
+<nav>
+<a class="brand" href="{% url 'news:article_list' %}">City News Portal</a>
+<a href="{% url 'news:article_list' %}">Home</a>
+{% if user.is_authenticated %}
+<a href="{% url 'news:saved_list' %}">Saved</a>
+{% if is_portal_admin %}<a href="{% url 'panel:dashboard' %}">Admin panel</a>{% endif %}
+<span class="meta">{{ user.username }}</span>
+<form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}<button type="submit">Log out</button></form>
+{% else %}
+<a href="{% url 'accounts:login' %}">Log in</a>
+<a href="{% url 'accounts:register' %}">Register</a>
+{% endif %}
+</nav>
+</header>
+<main>
+{% for message in messages %}
+<div class="msg {{ message.tags }}">{{ message }}</div>
+{% endfor %}
+{% block content %}{% endblock %}
+</main>
+</body>
+</html>

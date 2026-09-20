@@ -1,0 +1,11 @@
+{% extends "panel/base.html" %}
+{% block title %}Ban user{% endblock %}
+{% block panel_content %}
+<h2>Ban user: {{ target.username }}</h2>
+<form method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<button class="danger" type="submit">Ban user</button>
+<a href="{% url 'panel:user_list' %}">Cancel</a>
+</form>
+{% endblock %}

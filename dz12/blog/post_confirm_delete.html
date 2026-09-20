@@ -1,0 +1,13 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+    <h1>Вы уверены, что хотите удалить пост "{{ post.title }}"?</h1>
+    <form method="post">
+        {% csrf_token %}
+        <p>Это действие нельзя будет отменить.</p>
+        <button type="submit" style="background-color: red; color: white;">Да, удалить</button>
+    </form>
+    <p><a href="{% url 'blog:post_detail' post.id %}">Нет, вернуться назад</a></p>
+
+{% endblock %}

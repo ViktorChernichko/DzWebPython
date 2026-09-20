@@ -1,0 +1,17 @@
+FORTUNES = [
+    "A pleasant surprise is waiting for you around the corner.",
+    "Your hard work will soon be rewarded.",
+    "Someone close to you is thinking of you right now.",
+    "A small step today leads to a big leap tomorrow.",
+    "You will soon find the answer you have been looking for.",
+    "Good news will arrive from a faraway place.",
+    "Patience is the key to the door you want to open.",
+    "An old friend will bring a new opportunity.",
+    "Trust your instincts; they know more than you think.",
+    "Your kindness will return to you tenfold.",
+    "A journey of a thousand miles begins with a single click.",
+    "Today is a perfect day to start something new.",
+    "Luck favors the one who is prepared.",
+    "Your creativity will open an unexpected door.",
+    "The best is yet to come.",
+]

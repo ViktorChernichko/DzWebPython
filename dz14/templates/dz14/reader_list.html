@@ -1,0 +1,39 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+    <h1>Readers</h1>
+
+    {% if perms.dz14.add_reader %}
+        <p><a href="{% url 'dz14:reader_create' %}">+ Add reader</a></p>
+    {% endif %}
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <th>Full name</th>
+            <th>Email</th>
+            <th>Phone</th>
+            <th>Registered</th>
+            <th>Actions</th>
+        </tr>
+        {% for reader in readers %}
+        <tr>
+            <td>{{ reader.full_name }}</td>
+            <td>{{ reader.email }}</td>
+            <td>{{ reader.phone }}</td>
+            <td>{{ reader.registered_at }}</td>
+            <td>
+                {% if perms.dz14.change_reader %}<a href="{% url 'dz14:reader_update' reader.id %}">Edit</a>{% endif %}
+                {% if perms.dz14.delete_reader %} | <a href="{% url 'dz14:reader_delete' reader.id %}">Delete</a>{% endif %}
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="5">No readers found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p><a href="{% url 'dz14:book_list' %}">Go to books</a></p>
+
+{% endblock %}

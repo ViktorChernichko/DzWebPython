@@ -1,0 +1,11 @@
+{% extends "panel/base.html" %}
+{% block title %}Add user{% endblock %}
+{% block panel_content %}
+<h2>Add user</h2>
+<form method="post">
+{% csrf_token %}
+{{ form.as_p }}
+<button type="submit">Create user</button>
+<a href="{% url 'panel:user_list' %}">Cancel</a>
+</form>
+{% endblock %}

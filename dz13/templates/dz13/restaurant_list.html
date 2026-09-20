@@ -1,0 +1,42 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+    <h1>City Restaurants</h1>
+
+    <p><a href="{% url 'dz13:restaurant_create' %}">+ Add restaurant</a></p>
+
+    <form method="get" style="margin-bottom: 15px;">
+        {{ search_form.specialization }}
+        <button type="submit">Search</button>
+    </form>
+
+    <table border="1" cellpadding="8" cellspacing="0">
+        <tr>
+            <th>Name</th>
+            <th>Specialization</th>
+            <th>Address</th>
+            <th>Website</th>
+            <th>Phone</th>
+            <th>Actions</th>
+        </tr>
+        {% for restaurant in restaurants %}
+        <tr>
+            <td>{{ restaurant.name }}</td>
+            <td>{{ restaurant.specialization }}</td>
+            <td>{{ restaurant.address }}</td>
+            <td>{% if restaurant.website %}<a href="{{ restaurant.website }}" target="_blank">{{ restaurant.website }}</a>{% endif %}</td>
+            <td>{{ restaurant.phone }}</td>
+            <td>
+                <a href="{% url 'dz13:restaurant_update' restaurant.id %}">Edit</a> |
+                <a href="{% url 'dz13:restaurant_delete' restaurant.id %}">Delete</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="6">No restaurants found.</td>
+        </tr>
+        {% endfor %}
+    </table>
+
+{% endblock %}

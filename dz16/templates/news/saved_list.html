@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Saved articles{% endblock %}
+{% block content %}
+<h1>Saved for later</h1>
+{% for item in saved %}
+<div class="card">
+<h2><a href="{% url 'news:article_detail' item.article.pk %}">{{ item.article.title }}</a></h2>
+<p class="meta">Saved {{ item.saved_at|date:"Y-m-d H:i" }}</p>
+<form class="inline" method="post" action="{% url 'news:toggle_save' item.article.pk %}">
+{% csrf_token %}
+<input type="hidden" name="next" value="{{ request.path }}">
+<button type="submit">Remove</button>
+</form>
+</div>
+{% empty %}
+<p>You have not saved any articles yet.</p>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+    <h2>Добро пожаловать в личный кабинет!</h2>
+
+    <div style="border: 1px solid #ccc; padding: 15px; max-width: 300px;">
+        {% if user.avatar %}
+            <img src="{{ user.avatar.url }}" alt="Avatar" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; margin-bottom: 10px;">
+        {% endif %}
+        <p><strong>Логин:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Статус Админа:</strong> {{ user.is_superuser }}</p>
+    </div>
+
+    <br>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Обновить аватарку</button>
+    </form>
+
+    <br>
+
+    <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Выйти из системы</button>
+    </form>
+
+{% endblock %}

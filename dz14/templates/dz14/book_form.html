@@ -1,0 +1,18 @@
+{% extends 'layouts/base.html' %}
+
+{% block content %}
+
+    {% if book %}
+        <h1>Edit book: {{ book.title }}</h1>
+    {% else %}
+        <h1>Add book</h1>
+    {% endif %}
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <p><a href="{% url 'dz14:book_list' %}">Cancel</a></p>
+
+{% endblock %}
